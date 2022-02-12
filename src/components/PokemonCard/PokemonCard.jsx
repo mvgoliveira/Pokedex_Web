@@ -1,7 +1,6 @@
 import { Container, TypeTag } from "./styles";
 
-
-export default function PokemonCard({id, name, img}) {
+export default function PokemonCard({id, name, img, types}) {
   
   function normalizeId() {
     let string = "000" + id;
@@ -13,7 +12,7 @@ export default function PokemonCard({id, name, img}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        color = "80db60";
+        color = "8adb6e";
         break;
       
       case "dark":
@@ -95,7 +94,7 @@ export default function PokemonCard({id, name, img}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        color = "47a327";
+        color = "77ab2e";
         break;
       
       case "dark":
@@ -172,6 +171,88 @@ export default function PokemonCard({id, name, img}) {
     return color; 
   }
 
+  function getTypeIcon(type) {
+    let icon = "";
+
+    switch (type.toLowerCase()) {
+      case "bug":
+        icon = ;
+        break;
+      
+      case "dark":
+        color = ;
+        break;
+
+      case "dragon":
+        color = ;
+        break;
+      
+      case "electric":
+        color = ;
+        break;
+
+      case "fairy":
+        color = ;
+        break;
+      
+      case "fighting":
+        color = ;
+        break;
+      
+      case "fire":
+        color = ;
+        break;
+      
+      case "flying":
+        color = ;
+        break;
+
+      case "ghost":
+        color = ;
+        break;
+      
+      case "grass":
+        color = ;
+        break;
+
+      case "ground":
+        color = ;
+        break;
+      
+      case "ice":
+        color = ;
+        break;
+
+      case "normal":
+        color = ;
+        break;
+      
+      case "poison":
+        color = "863ebd";
+        break;
+
+      case "psychic":
+        color = ;
+        break;
+      
+      case "rock":
+        color = ;
+        break;
+
+      case "steel":
+        color = ;
+        break;
+      
+      case "water":
+        color = ;
+        break;
+
+      default:
+        break;
+    }
+    return color; 
+  }
+
   return (
     <Container color={getCardColor("bug")}>
       <div className="containerLeft">
@@ -179,8 +260,9 @@ export default function PokemonCard({id, name, img}) {
         <strong>{name}</strong>
 
         <section>
-          <TypeTag color={getTagColor("bug")}>bug</TypeTag>
-          <TypeTag color={getTagColor("poison")}>poison</TypeTag>
+          {types.map(type => {
+            return <TypeTag color={getTagColor(type)}>{type}</TypeTag>
+          })}
         </section>
       </div>
 

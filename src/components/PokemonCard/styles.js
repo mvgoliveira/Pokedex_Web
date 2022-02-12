@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import pokeball from "../../public/svg/pokeball.svg"
+import pokeball from "../../public/svg/pokeball.svg";
+import dots from "../../public/svg/dots.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -9,11 +10,20 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin-top: 80px;
+  margin-top: 40px;
   border-radius: 20px;
 
-  background: ${props => `#${props.color}`} url(${pokeball}) 108% no-repeat;
-  background-size: 180px;
+  box-shadow:
+    7px 10px 25px -17px rgba(0, 0, 0, 0.2);
+  ;
+
+
+  background-color: ${props => `#${props.color}`}; 
+  background-image: url(${pokeball}), url(${dots});
+  background-repeat: no-repeat;
+  background-position-x: 108%, 18%;
+  background-position-y: 50%, 10%;
+  background-size: 180px, 80px;
 
 
   img {

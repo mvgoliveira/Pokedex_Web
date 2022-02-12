@@ -13,7 +13,7 @@ export function Home() {
         <input type="text" id="searchInput" placeholder="Qual pokémon está procurando?"/>
       </section>
 
-      <PokemonCard id="14" name="Kakuna" img="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/14.png" />
+      <PokemonCard id="14" name="Kakuna" img="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/14.png" types={["bug", "poison"]} />
     </Container>
   )
 }

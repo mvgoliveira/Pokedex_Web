@@ -1,5 +1,6 @@
 import { Container, TypeTag } from "./styles";
 
+
 export default function PokemonCard({id, name, img, types}) {
   
   function normalizeId() {
@@ -176,7 +177,7 @@ export default function PokemonCard({id, name, img, types}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        icon = ;
+        icon = "https://commons.wikimedia.org/wiki/Category:Pokémon_types_icons#/media/File:Pokémon_Bug_Type_Icon.svg";
         break;
       
       case "dark":

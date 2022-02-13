@@ -13,75 +13,75 @@ export default function PokemonCard({id, name, img, types}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        color = "8adb6e";
+        color = "#88d16f";
         break;
       
       case "dark":
-        color = "88d16f";
+        color = "#6b6277";
         break;
 
       case "dragon":
-        color = "88d16f";
+        color = "#4a6fbe";
         break;
       
       case "electric":
-        color = "88d16f";
+        color = "#F2CB55";
         break;
 
       case "fairy":
-        color = "88d16f";
+        color = "#faaecd";
         break;
       
       case "fighting":
-        color = "88d16f";
+        color = "#EB4971";
         break;
       
       case "fire":
-        color = "88d16f";
+        color = "#f5a65c";
         break;
       
       case "flying":
-        color = "88d16f";
+        color = "#98bceb";
         break;
 
       case "ghost":
-        color = "88d16f";
+        color = "#926396";
         break;
       
       case "grass":
-        color = "88d16f";
+        color = "#74cf83";
         break;
 
       case "ground":
-        color = "88d16f";
+        color = "#F88551";
         break;
       
       case "ice":
-        color = "88d16f";
+        color = "#64bcc2";
         break;
 
       case "normal":
-        color = "88d16f";
+        color = "#77797c";
         break;
       
       case "poison":
-        color = "88d16f";
+        color = "#8e6cc4";
         break;
 
       case "psychic":
-        color = "88d16f";
+        color = "#e25f6c";
         break;
       
       case "rock":
-        color = "88d16f";
+        color = "#aa9b70";
         break;
 
       case "steel":
-        color = "88d16f";
+        color = "#868787";
         break;
       
       case "water":
-        color = "88d16f";
+        color = "#58ABF6";
         break;
 
       default:
@@ -95,75 +95,75 @@ export default function PokemonCard({id, name, img, types}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        color = "77ab2e";
+        color = "#84c400";
         break;
       
       case "dark":
-        color = "88d16f";
+        color = "#5B5366";
         break;
 
       case "dragon":
-        color = "88d16f";
+        color = "#0070CA";
         break;
       
       case "electric":
-        color = "88d16f";
+        color = "#FBD200";
         break;
 
       case "fairy":
-        color = "88d16f";
+        color = "#FB8AEC";
         break;
       
       case "fighting":
-        color = "88d16f";
+        color = "#E12C6A";
         break;
       
       case "fire":
-        color = "88d16f";
+        color = "#FF983F";
         break;
       
       case "flying":
-        color = "88d16f";
+        color = "#8AACE4";
         break;
 
       case "ghost":
-        color = "88d16f";
+        color = "#4B6AB3";
         break;
       
       case "grass":
-        color = "88d16f";
+        color = "#35C04A";
         break;
 
       case "ground":
-        color = "88d16f";
+        color = "#E97333";
         break;
       
       case "ice":
-        color = "88d16f";
+        color = "#4BD2C1";
         break;
 
       case "normal":
-        color = "88d16f";
+        color = "#929BA3";
         break;
       
       case "poison":
-        color = "863ebd";
+        color = "#B667CF";
         break;
 
       case "psychic":
-        color = "88d16f";
+        color = "#FF6676";
         break;
       
       case "rock":
-        color = "88d16f";
+        color = "#C9B787";
         break;
 
       case "steel":
-        color = "88d16f";
+        color = "#5A8FA3";
         break;
       
       case "water":
-        color = "88d16f";
+        color = "#3393DD";
         break;
 
       default:
@@ -177,92 +177,97 @@ export default function PokemonCard({id, name, img, types}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        icon = "https://commons.wikimedia.org/wiki/Category:Pokémon_types_icons#/media/File:Pokémon_Bug_Type_Icon.svg";
+        icon = "https://upload.wikimedia.org/wikipedia/commons/3/3c/Pokémon_Bug_Type_Icon.svg";
         break;
       
       case "dark":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/0/09/Pokémon_Dark_Type_Icon.svg";
         break;
 
       case "dragon":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pokémon_Dragon_Type_Icon.svg";
         break;
       
       case "electric":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/a/a9/Pokémon_Electric_Type_Icon.svg";
         break;
 
       case "fairy":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/0/08/Pokémon_Fairy_Type_Icon.svg";
         break;
       
       case "fighting":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/b/be/Pokémon_Fighting_Type_Icon.svg";
         break;
       
       case "fire":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/5/56/Pokémon_Fire_Type_Icon.svg";
         break;
       
       case "flying":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Pokémon_Flying_Type_Icon.svg";
         break;
 
       case "ghost":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pokémon_Ghost_Type_Icon.svg";
         break;
       
       case "grass":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Pokémon_Grass_Type_Icon.svg";
         break;
 
       case "ground":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/8/8d/Pokémon_Ground_Type_Icon.svg";
         break;
       
       case "ice":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/8/88/Pokémon_Ice_Type_Icon.svg";
         break;
 
       case "normal":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/a/aa/Pokémon_Normal_Type_Icon.svg";
         break;
       
       case "poison":
-        color = "863ebd";
+        icon = "https://upload.wikimedia.org/wikipedia/commons/c/c4/Pokémon_Poison_Type_Icon.svg";
         break;
 
       case "psychic":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/a/ab/Pokémon_Psychic_Type_Icon.svg";
         break;
       
       case "rock":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/b/bb/Pokémon_Rock_Type_Icon.svg";
         break;
 
       case "steel":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/3/38/Pokémon_Steel_Type_Icon.svg";
         break;
       
       case "water":
-        color = ;
+        icon = "https://upload.wikimedia.org/wikipedia/commons/0/0b/Pokémon_Water_Type_Icon.svg";
         break;
 
       default:
         break;
     }
-    return color; 
+    return icon; 
   }
 
   return (
-    <Container color={getCardColor("bug")}>
+    <Container color={getCardColor(types[0])}>
       <div className="containerLeft">
         <p>#{normalizeId()}</p>
         <strong>{name}</strong>
 
         <section>
           {types.map(type => {
-            return <TypeTag color={getTagColor(type)}>{type}</TypeTag>
+            return (
+              <TypeTag color={getTagColor(type)}>
+                <img src={getTypeIcon(type)} alt={`type ${type} of ${name}`} />
+                {type}
+              </TypeTag>
+            )
           })}
         </section>
       </div>

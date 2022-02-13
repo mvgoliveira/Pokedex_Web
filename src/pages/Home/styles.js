@@ -5,9 +5,10 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 100%;
-  height: 100vh;
+  height: 100%;
   
   padding-top: 80px;
+  margin-bottom: 50px;
 
   h1 {
     font-size: 2rem;
@@ -24,15 +25,17 @@ export const Container = styled.div`
 
   .inputContainer {
     display: flex;
-    margin-top: 20px;
-    padding: 15px;
+    margin: 20px 0;
+    padding: 18px;
     font-size: 1rem;
-    background: #eee;
+    background: #eaeaea;
+    border-radius: 5px;
     cursor: text;
     
     input {
+      font-size: 0.9rem;
       border: none;
-      background: #eee;
+      background: #eaeaea;
       outline: 0;
       width: 100%;
       margin-left: 10px;

@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin-top: 40px;
+  margin-top: 25px;
   border-radius: 20px;
 
   box-shadow:
@@ -18,7 +18,7 @@ export const Container = styled.div`
   ;
 
 
-  background-color: ${props => `#${props.color}`}; 
+  background-color: ${props => `${props.color}`}; 
   background-image: url(${pokeball}), url(${dots});
   background-repeat: no-repeat;
   background-position-x: 108%, 18%;
@@ -26,9 +26,10 @@ export const Container = styled.div`
   background-size: 180px, 80px;
 
 
-  img {
+  > img {
     position: relative;
     top: -20px;
+    right: 10px;
     height: 100%;
   }
 
@@ -38,7 +39,7 @@ export const Container = styled.div`
     margin-left: 25px;
     
     p {
-      color: #333;
+      color: #3e4042;
       font-weight: 700;
       font-size: 0.9rem;
     }
@@ -60,8 +61,15 @@ export const Container = styled.div`
 `
 
 export const TypeTag = styled.span`
-  padding: 10px 15px;
-  background: ${props => `#${props.color}`};
+  display: flex;
+  align-items: center;
+  padding: 3px 7px;
+  background: ${props => `${props.color}`};
   border-radius: 8px;
   color: #fff;
+
+  img {
+    height: 25px;
+    margin-right: 2px;
+  }
 `

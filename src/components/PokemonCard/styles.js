@@ -17,7 +17,6 @@ export const Container = styled.div`
     7px 10px 25px -17px rgba(0, 0, 0, 0.2);
   ;
 
-
   background-color: ${props => `${props.color}`}; 
   background-image: url(${pokeball}), url(${dots});
   background-repeat: no-repeat;
@@ -25,12 +24,20 @@ export const Container = styled.div`
   background-position-y: 50%, 10%;
   background-size: 180px, 80px;
 
-
+  cursor: pointer;
+  
   > img {
     position: relative;
     top: -20px;
     right: 10px;
     height: 100%;
+    transition: transform 250ms;
+  }
+  
+  :hover {
+    > img {
+      transform: translateY(10px);
+    }
   }
 
   .containerLeft {

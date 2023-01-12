@@ -37,7 +37,7 @@ export default function PokemonCard({id, name, img, types}) {
         break;
       
       case "fire":
-        color = "#f5a65c";
+        color = "#ffb46e";
         break;
       
       case "flying":
@@ -95,7 +95,7 @@ export default function PokemonCard({id, name, img, types}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        color = "#84c400";
+        color = "#90C12C";
         break;
       
       case "dark":
@@ -103,7 +103,7 @@ export default function PokemonCard({id, name, img, types}) {
         break;
 
       case "dragon":
-        color = "#0070CA";
+        color = "#0A6DC4";
         break;
       
       case "electric":
@@ -119,19 +119,19 @@ export default function PokemonCard({id, name, img, types}) {
         break;
       
       case "fire":
-        color = "#FF983F";
+        color = "#FF9C54";
         break;
       
       case "flying":
-        color = "#8AACE4";
+        color = "#8FA8DD";
         break;
 
       case "ghost":
-        color = "#4B6AB3";
+        color = "#5269AC";
         break;
       
       case "grass":
-        color = "#35C04A";
+        color = "#63BB5B";
         break;
 
       case "ground":
@@ -147,7 +147,7 @@ export default function PokemonCard({id, name, img, types}) {
         break;
       
       case "poison":
-        color = "#B667CF";
+        color = "#B567CE";
         break;
 
       case "psychic":
@@ -177,7 +177,7 @@ export default function PokemonCard({id, name, img, types}) {
 
     switch (type.toLowerCase()) {
       case "bug":
-        icon = "https://upload.wikimedia.org/wikipedia/commons/3/3c/Pokémon_Bug_Type_Icon.svg";
+        icon = "https://archives.bulbagarden.net/media/upload/9/9c/Bug_icon_SwSh.png";
         break;
       
       case "dark":
@@ -185,7 +185,7 @@ export default function PokemonCard({id, name, img, types}) {
         break;
 
       case "dragon":
-        icon = "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pokémon_Dragon_Type_Icon.svg";
+        icon = "https://archives.bulbagarden.net/media/upload/7/70/Dragon_icon_SwSh.png";
         break;
       
       case "electric":
@@ -201,19 +201,19 @@ export default function PokemonCard({id, name, img, types}) {
         break;
       
       case "fire":
-        icon = "https://upload.wikimedia.org/wikipedia/commons/5/56/Pokémon_Fire_Type_Icon.svg";
+        icon = "https://archives.bulbagarden.net/media/upload/a/ab/Fire_icon_SwSh.png";
         break;
       
       case "flying":
-        icon = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Pokémon_Flying_Type_Icon.svg";
+        icon = "https://archives.bulbagarden.net/media/upload/b/b5/Flying_icon_SwSh.png";
         break;
 
       case "ghost":
-        icon = "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pokémon_Ghost_Type_Icon.svg";
+        icon = "https://archives.bulbagarden.net/media/upload/0/01/Ghost_icon_SwSh.png";
         break;
       
       case "grass":
-        icon = "https://upload.wikimedia.org/wikipedia/commons/f/f6/Pokémon_Grass_Type_Icon.svg";
+        icon = "https://archives.bulbagarden.net/media/upload/a/a8/Grass_icon_SwSh.png";
         break;
 
       case "ground":
@@ -261,9 +261,9 @@ export default function PokemonCard({id, name, img, types}) {
         <strong>{name}</strong>
 
         <section>
-          {types.map(type => {
+          {types.map((type, idx)=> {
             return (
-              <TypeTag color={getTagColor(type)}>
+              <TypeTag color={getTagColor(type)} key={idx}>
                 <img src={getTypeIcon(type)} alt={`type ${type} of ${name}`} />
                 {type}
               </TypeTag>

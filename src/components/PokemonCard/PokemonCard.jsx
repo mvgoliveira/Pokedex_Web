@@ -255,7 +255,7 @@ export default function PokemonCard({id, name, img, types}) {
   }
 
   return (
-    <Container color={getCardColor(types[0])}>
+    <Container color={getCardColor(types[0].type.name)}>
       <div className="containerLeft">
         <p>#{normalizeId()}</p>
         <strong>{name}</strong>
@@ -263,9 +263,9 @@ export default function PokemonCard({id, name, img, types}) {
         <section>
           {types.map((type, idx)=> {
             return (
-              <TypeTag color={getTagColor(type)} key={idx}>
-                <img src={getTypeIcon(type)} alt={`type ${type} of ${name}`} />
-                {type}
+              <TypeTag color={getTagColor(type.type.name)} key={idx}>
+                <img src={getTypeIcon(type.type.name)} alt={`type ${type.type.name} of ${name}`} />
+                {type.type.name}
               </TypeTag>
             )
           })}

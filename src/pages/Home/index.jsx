@@ -11,6 +11,7 @@ export function Home() {
 	const [isFilterActived, setIsFilterActived] = useState(false);
 	const [categoriesSelected, setCategoriesSelected] = useState([]);
 	const [page, setPage] = useState(0);
+	const [allPokemonsData, setAllPokemonsData] = useState([]);
 	const [pokemons, setPokemons] = useState([]);
 	const [searchInputValue, setSearchInputValue] = useState('');
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -27,19 +28,33 @@ export function Home() {
 			searchPage = 1;
 			setPage(1);
 		} else {
-			searchText = e.searchText;
-			searchPage = Number(e.searchPage);
+			searchText = e.searchText ? e.searchText : "";
+			searchPage = e.searchPage ? Number(e.searchPage) : 1;
+
+			if (searchPage < 1) {
+				setPage(1);
+				searchPage =  1;
+			}
 		}
-		
+
 		try {
 			let pokemonsArray = [];
 			let FilteredPokemonsArray = [];
+			let pokemonsData = [];
+			let finalPage = 0;
 
-			if (!isNaN(searchText)) {
-				const {data: pokemonsData} = await axios.get(
+			if (allPokemonsData.length <= 0) {
+				const {data} = await axios.get(
 					`https://pokeapi.co/api/v2/pokemon?limit=1280`
 				);
+					
+				pokemonsData = data; 
+				setAllPokemonsData(pokemonsData);
+			} else {
+				pokemonsData = allPokemonsData;
+			}
 
+			if (!isNaN(searchText)) {
 				FilteredPokemonsArray = pokemonsData.results.filter(pokemon => 
 					pokemon.url
 						.replace("https://pokeapi.co/api/v2/pokemon/", "")
@@ -47,31 +62,48 @@ export function Home() {
 						.startsWith(searchText)
 				);
 			} else {
-				const {data: pokemonsData} = await axios.get(
-					`https://pokeapi.co/api/v2/pokemon?limit=1280`
-				);
-
 				FilteredPokemonsArray = pokemonsData.results.filter(pokemon => 
 					pokemon.name.startsWith(searchText)
 				);
-			}			
+			}
 
-			if (searchPage >= (FilteredPokemonsArray.length / 20).toFixed(0)) {
-				setPage((FilteredPokemonsArray.length / 20).toFixed(0));
-				searchPage = (FilteredPokemonsArray.length / 20).toFixed(0);
+			if (categoriesSelected.length > 0) {
+				console.log(pokemonsArray);
 
-				for (let i = (searchPage-1) * 20; i < FilteredPokemonsArray.length; i++) {
+				for (let i = 0; i < FilteredPokemonsArray.length; i++) {
 					const {data: pokemonData} = await axios.get(FilteredPokemonsArray[i].url);
 					
-					pokemonsArray.push({
-						id: pokemonData.id,
-						name: pokemonData.name,
-						types: pokemonData.types,
-						sprite: pokemonData.sprites.other['official-artwork'].front_default
+					categoriesSelected.forEach(category => {
+						pokemonData.types.every(type => {
+							if (category === type.type.name) {								
+								pokemonsArray.push({
+									id: pokemonData.id,
+									name: pokemonData.name,
+									types: pokemonData.types,
+									sprite: pokemonData.sprites.other['official-artwork'].front_default
+								});
+								
+								return false;
+							}
+						});
 					});
 				}
 			} else {
-				for (let i = (searchPage - 1) * 20; i < searchPage * 20; i++) {
+				if (searchPage >= (FilteredPokemonsArray.length / 20).toFixed(0)) {
+					if ((FilteredPokemonsArray.length / 20).toFixed(0) >= 1) {
+						setPage((FilteredPokemonsArray.length / 20).toFixed(0));
+						searchPage = (FilteredPokemonsArray.length / 20).toFixed(0);
+					} else {
+						setPage(1);
+						searchPage = 1;
+					}
+
+					finalPage = FilteredPokemonsArray.length;
+				} else {
+					finalPage = searchPage * 20;
+				}
+
+				for (let i = (searchPage - 1) * 20; i < finalPage; i++) {
 					const {data: pokemonData} = await axios.get(FilteredPokemonsArray[i].url);
 					
 					pokemonsArray.push({
@@ -82,7 +114,6 @@ export function Home() {
 					});
 				}
 			}
-
 
 			setPokemons(pokemonsArray);
 		} catch (error) {
@@ -109,53 +140,35 @@ export function Home() {
 		if (searchParams.get('categories')) {
 			setCategoriesSelected(searchParams.get('categories').split('+'));
 		}
-		
-		if (searchParams.get('page') && searchParams.get('page') > 1) {
-			setPage(searchParams.get('page'));
-		} else {
-			setPage(1);
-		}
 
 		if (searchParams.get('search')) {
 			setSearchInputValue(searchParams.get('search'));
-			handleSearch({
-				searchText: searchParams.get('search'),
-				searchPage: searchParams.get('page')
-			});
+		}
+		
+		if (searchParams.get('page') && searchParams.get('page') >= 1) {
+			setPage(searchParams.get('page'));
+		} else {
+			console.log("EXECUTEI", searchParams.get('page'));
+			setPage(1);
 		}
 	}, []);
 	
-	// useEffect(() => {
-	// 	async function getPokémons() {
-	// 		const {data: pokemonsData} = await axios.get(
-	// 			`https://pokeapi.co/api/v2/pokemon?offset=${(page - 1) * 20}`
-	// 		);
-			
-	// 		const pokemonsArray = [];
+	useEffect(() => {
+		if (page >= 1) {
+			searchParams.set('page', page);
+			setSearchParams(searchParams);	
 
-	// 		for (let i = 0; i < 20; i++) {
-	// 			const {data: pokemonData} = await axios.get(pokemonsData.results[i].url);
-				
-	// 			pokemonsArray.push({
-	// 				id: pokemonData.id,
-	// 				name: pokemonData.name,
-	// 				types: pokemonData.types,
-	// 				sprite: pokemonData.sprites.other['official-artwork'].front_default
-	// 			});
-	// 		}
+			if (searchParams.get('search')) {
+				handleSearch({searchPage: page, searchText: searchParams.get('search')});
+			} else {
+				handleSearch({searchPage: page});
+			}
 
-	// 		setPokemons(pokemonsArray);
-	// 	}
-		
-	// 	if (page >= 1) {
-	// 		searchParams.set('page', page);
-	// 		setSearchParams(searchParams);
-	// 	}
-
-	// 	if (page >= 1 && !searchParams.get('search')) {
-	// 		getPokémons();
-	// 	}
-	// }, [page]);
+		} else if (searchParams.get('page') && page < 0) {
+			searchParams.set('page', 1);
+			setSearchParams(searchParams);
+		}
+	}, [page]);
 
 	useEffect(() => {
 		if (categoriesSelected.length !== 0) {

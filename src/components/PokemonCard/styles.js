@@ -56,6 +56,10 @@ export const Container = styled.div`
       font-size: 2rem;
       font-weight: 700;
       margin-top: 5px;
+      max-width: 300px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     section {

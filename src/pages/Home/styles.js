@@ -76,6 +76,48 @@ export const Container = styled.div`
 			gap: 10px;
 		}
 	}
+
+`
+
+export const PaginationContainer = styled.section`
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	gap: 10px;
+	margin: 50px 0;
+
+	div {
+		font-size: .8rem;
+		display: flex;
+		gap: 5px;
+		align-items: center;
+		font-weight: 600;
+		background: #EAEAEA;
+		border-radius: 5px;
+		border: none;
+		padding: 15px 20px;
+		cursor: ${props => props.pageActived == 1 ? "not-allowed" : "pointer"};
+
+		color: ${props => props.pageActived == 1 ? "#888" : "#000"};
+	}
+
+	button {
+		:nth-of-type(${props => `${props.pageActived}`}) {
+			background: #D23D56;
+			color: #fff;
+		}
+
+		font-size: .8rem;
+		display: flex;
+		gap: 5px;
+		align-items: center;
+		font-weight: 600;
+		background: #EAEAEA;
+		border-radius: 5px;
+		border: none;
+		padding: 15px 20px;
+		cursor: pointer;
+	}
 `
 
 export const Category = styled.div`

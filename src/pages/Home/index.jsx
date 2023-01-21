@@ -1,17 +1,21 @@
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios'
-import PokemonCard from '../../components/PokemonCard/PokemonCard';
+
 import {ImSearch, ImCheckmark} from 'react-icons/im';
-import {HiFilter} from 'react-icons/hi';
-import { Container, Category } from './styles';
-import { useEffect, useState } from 'react';
+import {HiFilter, HiArrowSmRight, HiArrowSmLeft} from 'react-icons/hi';
+
+import { Container, Category, PaginationContainer } from './styles';
+
+import PokemonCard from '../../components/PokemonCard/PokemonCard';
 
 export function Home() {
 	const [isFilterActived, setIsFilterActived] = useState(false);
 	const [categoriesSelected, setCategoriesSelected] = useState([]);
 	const [page, setPage] = useState(0);
 	const [allPokemonsData, setAllPokemonsData] = useState([]);
+	const [allPokemonByCategoryData, setAllPokemonByCategoryData] = useState([]);
 	const [pokemons, setPokemons] = useState([]);
 	const [searchInputValue, setSearchInputValue] = useState('');
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -27,6 +31,7 @@ export function Home() {
 			searchText = searchInputValue;
 			searchPage = 1;
 			setPage(1);
+			setAllPokemonByCategoryData([]);
 		} else {
 			searchText = e.searchText ? e.searchText : "";
 			searchPage = e.searchPage ? Number(e.searchPage) : 1;
@@ -67,16 +72,18 @@ export function Home() {
 				);
 			}
 
-			if (categoriesSelected.length > 0) {
-				console.log(pokemonsArray);
+			if (categoriesSelected.length > 0 && allPokemonByCategoryData.length <= 0) {
+				const toastLoading = toast.loading("Buscando pokémons...");
+
+				let pokemonByCategoryArray = [];
 
 				for (let i = 0; i < FilteredPokemonsArray.length; i++) {
 					const {data: pokemonData} = await axios.get(FilteredPokemonsArray[i].url);
 					
 					categoriesSelected.forEach(category => {
-						pokemonData.types.every(type => {
-							if (category === type.type.name) {								
-								pokemonsArray.push({
+						pokemonData.types.every(types => {
+							if (category === types.type.name) {		
+								pokemonByCategoryArray.push({
 									id: pokemonData.id,
 									name: pokemonData.name,
 									types: pokemonData.types,
@@ -88,21 +95,40 @@ export function Home() {
 						});
 					});
 				}
-			} else {
-				if (searchPage >= (FilteredPokemonsArray.length / 20).toFixed(0)) {
-					if ((FilteredPokemonsArray.length / 20).toFixed(0) >= 1) {
-						setPage((FilteredPokemonsArray.length / 20).toFixed(0));
-						searchPage = (FilteredPokemonsArray.length / 20).toFixed(0);
-					} else {
-						setPage(1);
-						searchPage = 1;
-					}
 
-					finalPage = FilteredPokemonsArray.length;
+				setAllPokemonByCategoryData(pokemonByCategoryArray)
+				FilteredPokemonsArray = pokemonByCategoryArray;
+				
+				toast.update(toastLoading, {
+					render: "Pokémons encontrados!",
+					type: "success",
+					isLoading: false,
+					autoClose: 2000
+				});
+
+			} else if (categoriesSelected.length > 0 && allPokemonByCategoryData.length > 0) {
+				FilteredPokemonsArray = allPokemonByCategoryData;
+			}
+
+			if (searchPage >= (FilteredPokemonsArray.length / 20).toFixed(0)) {
+				if ((FilteredPokemonsArray.length / 20).toFixed(0) >= 1) {
+					setPage((FilteredPokemonsArray.length / 20).toFixed(0));
+					searchPage = (FilteredPokemonsArray.length / 20).toFixed(0);
 				} else {
-					finalPage = searchPage * 20;
+					setPage(1);
+					searchPage = 1;
 				}
 
+				finalPage = FilteredPokemonsArray.length;
+			} else {
+				finalPage = searchPage * 20;
+			}
+
+			if (categoriesSelected.length > 0) {
+				for (let i = (searchPage - 1) * 20; i < finalPage; i++) {
+					pokemonsArray.push(FilteredPokemonsArray[i]);
+				}
+			} else {
 				for (let i = (searchPage - 1) * 20; i < finalPage; i++) {
 					const {data: pokemonData} = await axios.get(FilteredPokemonsArray[i].url);
 					
@@ -136,6 +162,16 @@ export function Home() {
 		}
 	}
 
+	function handleSetPage(page) {
+		window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+		});
+		
+		setPage(Number(page));
+	}
+
 	useEffect(() => {
 		if (searchParams.get('categories')) {
 			setCategoriesSelected(searchParams.get('categories').split('+'));
@@ -146,9 +182,8 @@ export function Home() {
 		}
 		
 		if (searchParams.get('page') && searchParams.get('page') >= 1) {
-			setPage(searchParams.get('page'));
+			setPage(Number(searchParams.get('page')));
 		} else {
-			console.log("EXECUTEI", searchParams.get('page'));
 			setPage(1);
 		}
 	}, []);
@@ -159,8 +194,12 @@ export function Home() {
 			setSearchParams(searchParams);	
 
 			if (searchParams.get('search')) {
+				console.log(page);
+				console.log("EXECUTEI 1");
 				handleSearch({searchPage: page, searchText: searchParams.get('search')});
 			} else {
+				console.log(page);
+				console.log("EXECUTEI 2");
 				handleSearch({searchPage: page});
 			}
 
@@ -362,6 +401,16 @@ export function Home() {
 					/>
 				))}
 			</section>
+
+			<PaginationContainer pageActived={(page)} pages={(allPokemonsData.count / 20).toFixed(0)}>
+				<div> <HiArrowSmLeft size={15}/> anterior </div>
+				<button onClick={() => handleSetPage(1)}> 1 </button>
+				<button onClick={() => handleSetPage(2)}> 2 </button>
+				<button onClick={() => handleSetPage(3)}> 3 </button>
+				<button onClick={() => handleSetPage(4)}> 4 </button>
+				<button onClick={() => handleSetPage(5)}> 5 </button>
+				<button> próximo <HiArrowSmRight size={15}/> </button>
+			</PaginationContainer>
 		</Container>
 	)
 }
